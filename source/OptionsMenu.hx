@@ -31,7 +31,7 @@ class OptionsMenu extends MusicBeatState
 			"\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + 
 			"\nAccuracy " + (!FlxG.save.data.accuracyDisplay ? "off" : "on") + 
 			"\nSong Position " + (!FlxG.save.data.songPosition ? "off" : "on") +
-			"\nEtterna Mode " + (!FlxG.save.data.etternaMode ? "off" : "on")
+			"\nMiddlescroll " + (!FlxG.save.data.midscroll ? "off" : "on") +
 			#if mobile + "\nMobile Controls" #end);
 		
 		trace(controlsStrings);
@@ -134,8 +134,8 @@ class OptionsMenu extends MusicBeatState
 						ctrl.targetY = curSelected - 4;
 						grpControls.add(ctrl);
 					case 5:
-						FlxG.save.data.etternaMode = !FlxG.save.data.etternaMode;
-						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Etterna Mode " + (!FlxG.save.data.etternaMode ? "off" : "on"), true, false);
+						FlxG.save.data.midscroll = !FlxG.save.data.midscroll;
+						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Middlescroll " + (!FlxG.save.data.etternaMode ? "off" : "on"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 5;
 						grpControls.add(ctrl);

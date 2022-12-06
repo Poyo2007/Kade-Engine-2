@@ -162,12 +162,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-
-		if (FlxG.save.data.etternaMode)
-			Conductor.safeFrames = 7; // 116ms hit window (j3-4)
-		else
-			Conductor.safeFrames = 10; // 166ms hit window (j1)
-
+		Conductor.safeFrames = 7; // 116ms hit window (j3-4)
 
 		theFunne = FlxG.save.data.newInput;
 		if (FlxG.sound.music != null)
@@ -1239,20 +1234,29 @@ class PlayState extends MusicBeatState
 
 					sustainNote.mustPress = gottaHitNote;
 
+					if (FlxG.save.data.midscroll && !sustainNote.mustPress)
+						sustainNote.visible = false;
+
 					if (sustainNote.mustPress)
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
+						if (FlxG.save.data.midscroll) {
+							sustainNote.x -= 225;
+						}
 					}
 				}
 
 				swagNote.mustPress = gottaHitNote;
 
+				if (FlxG.save.data.midscroll && !swagNote.mustPress)
+						swagNote.visible = false;
+
 				if (swagNote.mustPress)
 				{
 					swagNote.x += FlxG.width / 2; // general offset
-				}
-				else
-				{
+					if (FlxG.save.data.midscroll) {
+							swagNote.x -= 225;
+					}
 				}
 			}
 			daBeats += 1;
@@ -1366,10 +1370,20 @@ class PlayState extends MusicBeatState
 			{
 				playerStrums.add(babyArrow);
 			}
+			
 
 			babyArrow.animation.play('static');
-			babyArrow.x += 50;
+			babyArrow.x += 100;
 			babyArrow.x += ((FlxG.width / 2) * player);
+			if (FlxG.save.data.midscroll && player == 0)
+			{
+				babyArrow.visible = false;
+			}
+
+			if (FlxG.save.data.midscroll && player == 1)
+			{
+				babyArrow.x -= 225;
+			}
 
 			strumLineNotes.add(babyArrow);
 		}
@@ -1872,10 +1886,12 @@ class PlayState extends MusicBeatState
 						}
 						else
 						{
-							health -= 0.075;
-							vocals.volume = 0;
-							if (theFunne)
-								noteMiss(daNote.noteData);
+							if (daNote.mustPress) {
+								health -= 0.075;
+								vocals.volume = 0;
+								if (theFunne)
+									noteMiss(daNote.noteData);
+							}
 						}
 	
 						daNote.active = false;
