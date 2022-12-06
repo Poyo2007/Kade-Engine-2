@@ -31,7 +31,7 @@ class OptionsMenu extends MusicBeatState
 			"\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + 
 			"\nAccuracy " + (!FlxG.save.data.accuracyDisplay ? "off" : "on") + 
 			"\nSong Position " + (!FlxG.save.data.songPosition ? "off" : "on") +
-			"\nMiddlescroll " + (!FlxG.save.data.midscroll ? "off" : "on") +
+			"\nMiddlescroll " + (!FlxG.save.data.midscroll ? "off" : "on")
 			#if mobile + "\nMobile Controls" #end);
 		
 		trace(controlsStrings);
