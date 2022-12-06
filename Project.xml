@@ -91,7 +91,6 @@
 
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
-	<haxelib name="hscript" />
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
@@ -147,18 +146,6 @@
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 	<haxedef name="HXCPP_STACK_TRACE"/>
-
-	<section if="android">
-		<!--Permissions-->
-		<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
-		<config:android permission="android.permission.ACCESS_WIFI_STATE" />
-		<config:android permission="android.permission.INTERNET" />
-		<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
-		<config:android permission="android.permission.READ_EXTERNAL_STORAGE" />
-
-		<!--Gradle-->
-		<config:android gradle-version="7.6" gradle-plugin="7.3.1" />
-	</section>
 
 	<section if="ios">
 		<!--Dependency--> 
