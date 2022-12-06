@@ -141,7 +141,7 @@ class OptionsMenu extends MusicBeatState
 						grpControls.add(ctrl);
 					case 6:
 						trace('switch');
-						FlxG.openSubState(new mobile.MobileControlsSubState());
+						openSubState(new mobile.MobileControlsSubState());
 				}
 			}
 		FlxG.save.flush();
