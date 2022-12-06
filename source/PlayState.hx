@@ -915,8 +915,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (!loadRep)
-			rep = new Replay("na");
 
 		super.create();
 	}
@@ -1919,9 +1917,6 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		if (!loadRep)
-			rep.SaveReplay();
-
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
