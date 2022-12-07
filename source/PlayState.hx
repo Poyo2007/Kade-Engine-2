@@ -92,7 +92,6 @@ class PlayState extends MusicBeatState
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
 	private var playerStrums:FlxTypedGroup<FlxSprite>;
 
-	private var camZooming:Bool = false;
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
@@ -757,7 +756,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
-		FlxG.camera.zoom = defaultCamZoom;
+		camGame.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
@@ -1219,6 +1218,9 @@ class PlayState extends MusicBeatState
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
 
+				if (FlxG.save.data.midscroll)
+					swagNote.alpha = 0;
+
 				var susLength:Float = swagNote.sustainLength;
 
 				susLength = susLength / Conductor.stepCrochet;
@@ -1235,29 +1237,26 @@ class PlayState extends MusicBeatState
 					sustainNote.mustPress = gottaHitNote;
 
 					if (FlxG.save.data.midscroll)
-						sustainNote.visible = false;
+						sustainNote.alpha = 0;
 
 					if (sustainNote.mustPress)
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
 						if (FlxG.save.data.midscroll) {
 							sustainNote.x -= Note.swagWidth * 2;
-							sustainNote.visible = true;
+							sustainNote.alpha = 1;
 						}
 					}
 				}
 
 				swagNote.mustPress = gottaHitNote;
 
-				if (FlxG.save.data.midscroll)
-						swagNote.visible = false;
-
 				if (swagNote.mustPress)
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 					if (FlxG.save.data.midscroll) {
 							swagNote.x -= Note.swagWidth * 2;
-							swagNote.visible = true;
+							swagNote.alpha = 1;
 					}
 				}
 			}
@@ -1749,12 +1748,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camZooming)
-		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, 0.95);
-		}
-
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
 
@@ -1763,7 +1756,6 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 16:
-					camZooming = true;
 					gfSpeed = 2;
 				case 48:
 					gfSpeed = 1;
@@ -1838,9 +1830,8 @@ class PlayState extends MusicBeatState
 	
 					if (!daNote.mustPress && daNote.wasGoodHit)
 					{
-						if (SONG.song != 'Tutorial')
-							camZooming = true;
-	
+						if (SONG.song != 'Tutorial')	
+
 						var altAnim:String = "";
 	
 						if (SONG.notes[Math.floor(curStep / 16)] != null)
@@ -2771,19 +2762,6 @@ class PlayState extends MusicBeatState
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
-
-		// HARDCODING FOR MILF ZOOMS!
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
-
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
 		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
