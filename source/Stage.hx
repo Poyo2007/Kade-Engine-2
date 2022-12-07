@@ -7,7 +7,7 @@ import PlayState;
 
 using flixel.util.FlxSpriteUtil;
 
-class HUD extends FlxTypedGroup<FlxSprite> {
+class Stage extends FlxTypedGroup<FlxSprite> {
 	public function new() {
 		PlayState.defaultCamZoom = 0.9;
 		PlayState.curStage = 'stage';

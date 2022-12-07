@@ -145,11 +145,11 @@ class PlayState extends MusicBeatState
 	var replayTxt:FlxText;
 
 	var stageBG:Stage;
-	var gfVersion:String = 'gf';
+	public static var gfVersion:String = 'gf';
 
 	public static var campaignScore:Int = 0;
 
-	var defaultCamZoom:Float = 1.05;
+	public static var defaultCamZoom:Float = 1.05;
 
 	public static var daPixelZoom:Float = 6;
 
