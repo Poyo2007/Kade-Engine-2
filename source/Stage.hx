@@ -9,6 +9,7 @@ using flixel.util.FlxSpriteUtil;
 
 class Stage extends FlxTypedGroup<FlxSprite> {
 	public function new() {
+		super();
 		PlayState.defaultCamZoom = 0.9;
 		PlayState.curStage = 'stage';
 
@@ -34,6 +35,5 @@ class Stage extends FlxTypedGroup<FlxSprite> {
 		stageCurtains.active = false;
 
 		add(stageCurtains);
-		super();
 	}
 }
