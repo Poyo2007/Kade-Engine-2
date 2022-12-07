@@ -135,7 +135,7 @@ class OptionsMenu extends MusicBeatState
 						grpControls.add(ctrl);
 					case 5:
 						FlxG.save.data.midscroll = !FlxG.save.data.midscroll;
-						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Middlescroll " + (!FlxG.save.data.etternaMode ? "off" : "on"), true, false);
+						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Middlescroll " + (!FlxG.save.data.midscroll ? "off" : "on"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 5;
 						grpControls.add(ctrl);

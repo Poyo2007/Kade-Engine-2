@@ -809,7 +809,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		var kadeEngineWatermark = new FlxText(FlxG.width * 0.03,FlxG.height * 0.94,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + " - KE " + MainMenuState.kadeEngineVer, 16);
+		var kadeEngineWatermark = new FlxText(0,FlxG.height - 16,0,SONG.song + " " + CoolUtil.difficultyArray[storyDifficulty] + " - kade engine 2 (REAL)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -1234,28 +1234,30 @@ class PlayState extends MusicBeatState
 
 					sustainNote.mustPress = gottaHitNote;
 
-					if (FlxG.save.data.midscroll && !sustainNote.mustPress)
+					if (FlxG.save.data.midscroll)
 						sustainNote.visible = false;
 
 					if (sustainNote.mustPress)
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
 						if (FlxG.save.data.midscroll) {
-							sustainNote.x -= 225;
+							sustainNote.x -= Note.swagWidth * 2;
+							sustainNote.visible = true;
 						}
 					}
 				}
 
 				swagNote.mustPress = gottaHitNote;
 
-				if (FlxG.save.data.midscroll && !swagNote.mustPress)
+				if (FlxG.save.data.midscroll)
 						swagNote.visible = false;
 
 				if (swagNote.mustPress)
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 					if (FlxG.save.data.midscroll) {
-							swagNote.x -= 225;
+							swagNote.x -= Note.swagWidth * 2;
+							swagNote.visible = true
 					}
 				}
 			}
@@ -1373,7 +1375,8 @@ class PlayState extends MusicBeatState
 			
 
 			babyArrow.animation.play('static');
-			babyArrow.x += 100;
+			if (!FlxG.save.data.midscroll)
+				babyArrow.x += 100;
 			babyArrow.x += ((FlxG.width / 2) * player);
 			if (FlxG.save.data.midscroll && player == 0)
 			{
@@ -1382,7 +1385,7 @@ class PlayState extends MusicBeatState
 
 			if (FlxG.save.data.midscroll && player == 1)
 			{
-				babyArrow.x -= 225;
+				babyArrow.x -= Note.swagWidth * 2;
 			}
 
 			strumLineNotes.add(babyArrow);
