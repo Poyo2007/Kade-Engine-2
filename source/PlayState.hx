@@ -1257,7 +1257,7 @@ class PlayState extends MusicBeatState
 					swagNote.x += FlxG.width / 2; // general offset
 					if (FlxG.save.data.midscroll) {
 							swagNote.x -= Note.swagWidth * 2;
-							swagNote.visible = true
+							swagNote.visible = true;
 					}
 				}
 			}
