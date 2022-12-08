@@ -164,8 +164,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		Paths.clearStoredMemory();
-
 		Conductor.safeFrames = 7; // 116ms hit window (j3-4)
 
 		theFunne = FlxG.save.data.newInput;
@@ -564,7 +562,6 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
-		Paths.clearUnusedMemory();
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
