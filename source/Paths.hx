@@ -1,7 +1,13 @@
 package;
 
-import flixel.graphics.FlxGraphic;
+import flixel.math.FlxPoint;
+import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
+import openfl.geom.Rectangle;
+import flixel.math.FlxRect;
+import haxe.xml.Access;
+import openfl.system.System;
 import flixel.FlxG;
+import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
@@ -10,7 +16,7 @@ class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
-		public static function excludeAsset(key:String) {
+	public static function excludeAsset(key:String) {
 		if (!dumpExclusions.contains(key))
 			dumpExclusions.push(key);
 	}
@@ -146,15 +152,27 @@ class Paths
 	{
 		return 'songs:assets/songs/${song.toLowerCase()}/Voices.$SOUND_EXT';
 	}
+	
+	inline static public function voicesbside(song:String)
+	{
+		return 'songs:assets/songs/${song.toLowerCase()}/VoicesBSide.$SOUND_EXT';
+	}
 
 	inline static public function inst(song:String)
 	{
 		return 'songs:assets/songs/${song.toLowerCase()}/Inst.$SOUND_EXT';
 	}
-
-	inline static public function image(key:String, ?library:String)
+	
+	inline static public function instbside(song:String)
 	{
-		return getPath('images/$key.png', IMAGE, library);
+		return 'songs:assets/songs/${song.toLowerCase()}/InstBSide.$SOUND_EXT';
+	}
+
+	inline static public function image(key:String, ?library:String):Dynamic
+	{
+		// streamlined the assets process more
+		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		return returnAsset;
 	}
 
 	inline static public function font(key:String)
@@ -162,7 +180,7 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
-	inline static public function getSparrowAtlas(key:String, ?library:String)
+	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
 	}
@@ -171,7 +189,8 @@ class Paths
 	{
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 	}
-	
+
+	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	public static function returnGraphic(key:String, ?library:String) {
 		var path = getPath('images/$key.png', IMAGE, library);
@@ -186,4 +205,5 @@ class Paths
 		trace('oh no its returning null NOOOO');
 		return null;
 	}
+    //STOLE YOUR CODE YOSHUBS LMAOOOOO
 }
