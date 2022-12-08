@@ -7,6 +7,7 @@ import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import com.kircom.debug.FPS_Mem;
 
 class Main extends Sprite
 {
